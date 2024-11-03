@@ -6,31 +6,62 @@ import dislike from "../assets/dislike.png";
 import share from "../assets/share.png";
 import save from "../assets/save.png";
 import CommentCard from "../Components/CommentCard";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { API_KEY } from "../data";
+import moment from "moment";
 function Video() {
+  const { videoId, categoryId } = useParams();
+  const [apiData, setApiData] = useState(null);
+
+  const fetchVideoData = async () => {
+    const fetchUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
+    await fetch(fetchUrl)
+      .then((response) => response.json())
+      .then((data) => setApiData(data.items[0]));
+  };
+  useEffect(() => {
+    fetchVideoData();
+  }, []);
+
+  const [apiChannelData, setApiChannelData] = useState(null);
+
+  const fetchChannelData = async () => {
+    const fetchUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`;
+    await fetch(fetchUrl)
+      .then((response) => response.json())
+      .then((data) => setApiChannelData(data.items[0]));
+  };
+
+  useEffect(() => {
+    fetchChannelData();
+  }, []);
 
   return (
     <div className="container mx-auto p-4 flex gap-4">
       <div className="w-[80%]">
         <iframe
-          className="w-full h-[600px]"
-          src="https://www.youtube.com/embed/vnhmqWqs7kI?si=FDEFsZrVwLqyZ1pF"
-          title="YouTube video player"
+          className="w-full h-[37vw]"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
 
         <h1 className="text-2xl font-bold py-2">
-          This video for like our song and play game
+          {apiData ? apiData.snippet.title : "Title Not Found"}
         </h1>
         <div className="flex justify-between items-center py-2">
-          <p>7M views • 9 hours ago</p>
+          <p>
+            {apiData ? apiData.statistics.viewCount : ""} views •{" "}
+            {apiData ? moment(apiData.snippet.publishedAt).fromNow() : ""}
+          </p>
           <div className="flex gap-4 items-center">
             <div className="flex items-center gap-2">
               <img className="w-6" src={like} alt="" />
-              <p>23K</p>
+              <p>{apiData ? apiData.statistics.likeCount : ""}</p>
             </div>
             <div className="flex items-center gap-2">
-              <img className="w-6" src={dislike} alt="" /> <p>2K</p>
+              <img className="w-6" src={dislike} alt="" /> <p></p>
             </div>
             <div className="flex items-center gap-2">
               <img className="w-6" src={share} alt="" /> <p>Share</p>
@@ -45,8 +76,10 @@ function Video() {
           <div className="flex items-center py-2 gap-4 ">
             <img className="rounded-full w-14" src={jack} alt="" />
             <div>
-              <h2 className="font-bold">Netflix</h2>
-              <p>320M subscribers</p>
+              <h2 className="font-bold">
+                {apiData ? apiData.snippet.channelTitle : ""}
+              </h2>
+              <p>30M subscribers</p>
             </div>
           </div>
           <div>
@@ -57,13 +90,12 @@ function Video() {
         </div>
         <div className="ps-16">
           <p className="py-1">
-            There no stopping the game. Squid Game Season 2 on December 26,
-            2024. Only on Netflix. More Info on Squid Game Season 2: Three years
-            after winning Squid Game, Player 456 gave up going to the states and
-            comes back with a new resolution in his min
+            {apiData ? apiData.snippet.description.slice(0, 250) : ""}
           </p>
           <hr />
-          <h2 className=" font-bold py-2">12K Comments</h2>
+          <h2 className=" font-bold py-2">
+            {apiData ? apiData.statistics.commentCount : ""} Comments
+          </h2>
           <div>
             <CommentCard />
             <CommentCard />
