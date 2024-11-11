@@ -1,5 +1,4 @@
 import menu_icon from "../assets/menu.png";
-import logo from "../assets/logo.png";
 import search_icon from "../assets/search.png";
 import upload_icon from "../assets/upload.png";
 import more_icon from "../assets/more.png";
@@ -19,7 +18,7 @@ function Navbar({ setSidebar }) {
             className="w-5 cursor-pointer"
           />
           <Link className="hidden sm:block" to="/">
-            <img src={logo} className="w-36" />
+            <div className="flex items-center gap-2 font-bold text-2xl"><i className="bi bi-youtube text-4xl text-red-500"></i> Rabbi Tube</div>
           </Link>
         </div>
 

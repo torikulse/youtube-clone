@@ -41,7 +41,7 @@ function Video() {
     <div className="container mx-auto p-4 flex gap-4">
       <div className="w-[80%]">
         <iframe
-          className="w-full h-[37vw]"
+          className="w-full aspect-video rounded"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen

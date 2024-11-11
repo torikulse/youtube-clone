@@ -1,4 +1,3 @@
-import home_icon from "../assets/home.png";
 import game_icon from "../assets/game_icon.png";
 import automobiles_icon from "../assets/automobiles.png";
 import sports_icon from "../assets/sports.png";
@@ -27,10 +26,11 @@ function Sidebar({ sidebar, category, setCategory }) {
         onClick={() => setCategory(0)}
         className={`flex items-center gap-4 px-2 py-1.5 rounded-lg cursor-pointer hover:bg-gray-100`}
       >
-        <img
+        <i className={`bi bi-house-door-fill text-gray-500 ${category == 0 ? "border-b-2 border-red-500" : ""}`}></i>
+        {/* <img
           src={home_icon}
           className={`w-5 ${category == 0 ? "border-b-2 border-red-500" : ""}`}
-        />
+        /> */}
         <p>Home</p>
       </div>
       <div
