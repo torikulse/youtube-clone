@@ -18,7 +18,7 @@ function Navbar({ setSidebar }) {
             className="w-5 cursor-pointer"
           />
           <Link className="hidden sm:block" to="/">
-            <div className="flex items-center gap-2 font-bold text-2xl"><i className="bi bi-youtube text-4xl text-red-500"></i> Rabbi Tube</div>
+            <div className="flex items-center gap-2 font-bold text-2xl"><i className="bi bi-youtube text-4xl text-red-500"></i>TorikulTube</div>
           </Link>
         </div>
 
