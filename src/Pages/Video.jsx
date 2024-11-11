@@ -97,14 +97,7 @@ function Video() {
             {apiData ? apiData.statistics.commentCount : ""} Comments
           </h2>
           <div>
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
-            <CommentCard />
+
           </div>
         </div>
       </div>
