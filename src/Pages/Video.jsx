@@ -5,7 +5,7 @@ import like from "../assets/like.png";
 import dislike from "../assets/dislike.png";
 import share from "../assets/share.png";
 import save from "../assets/save.png";
-import CommentCard from "../Components/CommentCard";
+import Commentcard from "../Components/Commentcard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_KEY } from "../data";
@@ -97,7 +97,12 @@ function Video() {
             {apiData ? apiData.statistics.commentCount : ""} Comments
           </h2>
           <div>
-
+            <Commentcard />
+            <Commentcard />
+            <Commentcard />
+            <Commentcard />
+            <Commentcard />
+            <Commentcard />
           </div>
         </div>
       </div>
