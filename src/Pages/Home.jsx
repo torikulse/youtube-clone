@@ -5,7 +5,7 @@ import Feed from "../Components/Feed";
 function Home({ sidebar }) {
   const [category, setCategory] = useState(0);
   return (
-    <>
+    <div className="">
       <div className="flex items-start">
         <Sidebar
           sidebar={sidebar}
@@ -14,7 +14,7 @@ function Home({ sidebar }) {
         />
         <Feed sidebar={sidebar} category={category} />
       </div>
-    </>
+    </div>
   );
 }
 
